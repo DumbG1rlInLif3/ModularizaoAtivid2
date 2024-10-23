@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        MiniChatBot chatbot = new MiniChatBot();
+
+        String saudacoes = chatbot.saudacoes();
+        System.out.println(saudacoes);
+
+        String Oi = sc.nextLine();
+
+        if (Oi.equals("Oi") || Oi.equals("oi") || Oi.equals("Olá") || Oi.equals("olá") || Oi.equals("Ola") || Oi.equals("ola")) {
+
+            chatbot.conversar("Olá! Como posso ajudar?");
+
+        }
+
+        String estado = sc.nextLine();
+
+        switch (estado) {
+            case "Como você está?", "Como voce esta?", "como vc esta?", "Como vai?", "como vai?", "Tudo bem?", "tudo bem?", "td bem?"->
+                    chatbot.conversar("Estou funcionando perfeitamente. Obrigado!");
+        }
+
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+public class MiniChatBot {
+
+    public int numeracao = 0;
+
+    public String chatBot;
+
+    public String saudacoes() {
+        return "Olá! Eu sou o MiniChatBot, prazer em lhe conhecer. Como posso ajudar?";
+    }
+
+    public void conversar(String oqueDizer) {
+        System.out.println(oqueDizer);
+    }
+
+
+
+
+
+}
