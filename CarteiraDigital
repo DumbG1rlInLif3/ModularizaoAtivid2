@@ -58,3 +58,53 @@ public class CarteiraDigital {
         System.out.println("5 - Sair");
     }
 }
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+packet Main
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        CarteiraDigital carteira = new CarteiraDigital();
+
+        System.out.println("Bem-vindo à sua Carteira Digital!");
+
+        boolean executando = true;
+
+        while (executando) {
+            CarteiraDigital.menu(); // Exibe o menu
+            System.out.print("Usuário: ");
+            int opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite o valor para adicionar ao saldo: ");
+                    double valorAdicionar = scanner.nextDouble();
+                    carteira.adicionarSaldo(valorAdicionar);
+                    break;
+
+                case 2:
+                    System.out.print("Digite o valor do pagamento: ");
+                    double valorPagamento = scanner.nextDouble();
+                    carteira.realizarPagamento(valorPagamento);
+                    break;
+
+                case 3:
+                    carteira.verificarSaldo();
+                    break;
+
+                case 4:
+                    carteira.exibirHistorico();
+                    break;
+
+                case 5:
+                    System.out.println("Obrigado por usar a sua Carteira Digital!");
+                    executando = false; // Encerra o loop
+                    break;
+            }
+        }
+
+        scanner.close();
+    }
+}
