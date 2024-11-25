@@ -1,29 +1,58 @@
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
+    public class ChatBot {
+        private boolean running;
+        //Tipo: boolean (verdadeiro ou falso).
+        //Visibilidade: private (só pode ser acessada dentro da classe ChatBot).
+        //Função: Indica se o chatbot está "rodando" ou se o programa deve encerrar.
 
-        Scanner sc = new Scanner(System.in);
-
-        MiniChatBot chatbot = new MiniChatBot();
-
-        String saudacoes = chatbot.saudacoes();
-        System.out.println(saudacoes);
-
-        String Oi = sc.nextLine();
-
-        if (Oi.equals("Oi") || Oi.equals("oi") || Oi.equals("Olá") || Oi.equals("olá") || Oi.equals("Ola") || Oi.equals("ola")) {
-
-            chatbot.conversar("Olá! Como posso ajudar?");
-
+        public ChatBot() {
+            this.running = true;
         }
 
-        String estado = sc.nextLine();
+        public void start() {
+            Scanner scanner = new Scanner(System.in);
 
-        switch (estado) {
-            case "Como você está?", "Como voce esta?", "como vc esta?", "Como vai?", "como vai?", "Tudo bem?", "tudo bem?", "td bem?"->
-                    chatbot.conversar("Estou funcionando perfeitamente. Obrigado!");
+            System.out.println("Olá! Eu sou o MiniChatbot. Como posso te ajudar hoje?");
+            while (running) {
+                System.out.print("Usuário: ");
+
+                String input = scanner.nextLine().trim().toLowerCase();
+                //Lê a entrada do usuário.
+                //Remove espaços desnecessários no início ou no final.
+                //Converte a entrada para letras minúsculas para simplificar comparações.
+
+                String response = handleInput(input);
+                //Essa linha centraliza a lógica de decidir como o chatbot deve responder com base no que o usuário digitou.
+                //O método handleInput é responsável por analisar a entrada (input) e retornar a resposta apropriada.
+
+                System.out.println("MiniChatbot: " + response);
+
+                if ("Tchau! Até a próxima.".equals(response)) {
+                    running = false;
+                }
+            }
+            scanner.close();
         }
+
+        private String handleInput(String input) {
+
+            return switch (input) {
+                case "oi" -> "Olá! Como posso ajudar?";
+                case "como você está?" -> "Estou funcionando perfeitamente, obrigado!";
+                case "qual é o seu nome?" -> "Eu sou o MiniChatbot, seu assistente virtual!";
+                case "sair" -> "Tchau! Até a próxima.";
+                default -> "Desculpe, não entendi. Pode reformular?";
+            };
+        }
+        //Entrada: A string input, que é o texto digitado pelo usuário (ex.: "oi").
+        //Saída: Uma string com a resposta do chatbot (ex.: "Olá! Como posso ajudar?").
+        //Atribuição à variável --> response
+        //O valor retornado pelo método handleInput (uma resposta específica) é armazenado em --> response.
+        //Exemplo:
+        //Se input for "oi", o método retorna "Olá! Como posso ajudar?".
+        //Essa resposta será atribuída à variável response.
+    }
 
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
