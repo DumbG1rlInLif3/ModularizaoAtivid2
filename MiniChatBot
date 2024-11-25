@@ -1,77 +1,104 @@
+package chatbot;
+
+import java.util.Random;
 import java.util.Scanner;
 
-    public class ChatBot {
-        private boolean running;
-        //Tipo: boolean (verdadeiro ou falso).
-        //Visibilidade: private (só pode ser acessada dentro da classe ChatBot).
-        //Função: Indica se o chatbot está "rodando" ou se o programa deve encerrar.
+public class ChatBot {
+    private boolean running;
+    //Tipo: boolean (verdadeiro ou falso).
+    //Visibilidade: private (só pode ser acessada dentro da classe ChatBot).
+    //Função: Indica se o chatbot está "rodando" ou se o programa deve encerrar.
 
-        public ChatBot() {
-            this.running = true;
-        }
+    public ChatBot() {
+        this.running = true;
+    }
 
-        public void start() {
-            Scanner scanner = new Scanner(System.in);
+    public void start() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Olá! Eu sou o MiniChatbot. Como posso te ajudar hoje?");
 
-            System.out.println("Olá! Eu sou o MiniChatbot. Como posso te ajudar hoje?");
-            while (running) {
-                System.out.print("Usuário: ");
+        while (running) {
+            System.out.print("Usuário: ");
 
-                String input = scanner.nextLine().trim().toLowerCase();
-                //Lê a entrada do usuário.
-                //Remove espaços desnecessários no início ou no final.
-                //Converte a entrada para letras minúsculas para simplificar comparações.
+            String input = scanner.nextLine().trim().toLowerCase();
+            //Lê a entrada do usuário.
+            //Remove espaços desnecessários no início ou no final.
+            //Converte a entrada para letras minúsculas para simplificar comparações.
 
-                String response = handleInput(input);
-                //Essa linha centraliza a lógica de decidir como o chatbot deve responder com base no que o usuário digitou.
-                //O método handleInput é responsável por analisar a entrada (input) e retornar a resposta apropriada.
+            String response = handleInput(input);
+            //Essa linha centraliza a lógica de decidir como o chatbot deve responder com base no que o usuário digitou.
+            //O método handleInput é responsável por analisar a entrada (input) e retornar a resposta apropriada.
 
-                System.out.println("MiniChatbot: " + response);
+            System.out.println("MiniChatbot: " + response);
 
-                if ("Tchau! Até a próxima.".equals(response)) {
-                    running = false;
-                }
+            if ("Tchau! Até a próxima.".equals(response)) {
+                running = false; // Para o loop principal
             }
-            scanner.close();
         }
 
-        private String handleInput(String input) {
+        scanner.close();
+    }
 
-            return switch (input) {
-                case "oi" -> "Olá! Como posso ajudar?";
-                case "como você está?" -> "Estou funcionando perfeitamente, obrigado!";
-                case "qual é o seu nome?" -> "Eu sou o MiniChatbot, seu assistente virtual!";
-                case "sair" -> "Tchau! Até a próxima.";
-                default -> "Desculpe, não entendi. Pode reformular?";
-            };
-        }
-        //Entrada: A string input, que é o texto digitado pelo usuário (ex.: "oi").
-        //Saída: Uma string com a resposta do chatbot (ex.: "Olá! Como posso ajudar?").
-        //Atribuição à variável --> response
-        //O valor retornado pelo método handleInput (uma resposta específica) é armazenado em --> response.
-        //Exemplo:
-        //Se input for "oi", o método retorna "Olá! Como posso ajudar?".
-        //Essa resposta será atribuída à variável response.
+    private String handleInput(String input) {
+        Random random = new Random(); // Gerador de números aleatórios
+
+        return switch (input) {
+            case "oi" -> {
+                String[] respostasOi = {
+                        "Olá! Como posso ajudar?",
+                        "Oi! Tudo bem?",
+                        "Olá, seja bem-vindo!"
+                };
+                yield respostasOi[random.nextInt(respostasOi.length)];
+            }
+            case "como você está?" -> {
+                String[] respostasComo = {
+                        "Estou funcionando perfeitamente, obrigado!",
+                        "Estou ótimo, e você?",
+                        "Tudo tranquilo por aqui!"
+                };
+                yield respostasComo[random.nextInt(respostasComo.length)];
+            }
+            case "qual é o seu nome?" -> {
+                String[] respostasNome = {
+                        "Eu sou o MiniChatbot, seu assistente virtual!",
+                        "Pode me chamar de MiniChatbot.",
+                        "Meu nome é MiniChatbot, prazer!"
+                };
+                yield respostasNome[random.nextInt(respostasNome.length)];
+            }
+            case "sair" -> "Tchau! Até a próxima.";
+            default -> {
+                String[] respostasPadrao = {
+                        "Desculpe, não entendi. Pode reformular?",
+                        "Não compreendi. Tente de novo.",
+                        "Não sei responder a isso ainda, mas estou aprendendo!"
+                };
+                yield respostasPadrao[random.nextInt(respostasPadrao.length)];
+            }
+        };
+    }
+    //'yield' --> Usado dentro de um bloco para especificar qual valor deve ser retornado dessa
+    //ramificação do switch.
+    //Substitui o uso anterior de variáveis e atribuições intermediárias.
+
+    //Entrada: A string input, que é o texto digitado pelo usuário (ex.: "oi").
+    //Saída: Uma string com a resposta do chatbot (ex.: "Olá! Como posso ajudar?").
+    //Atribuição à variável --> response
+    //O valor retornado pelo método handleInput (uma resposta específica) é armazenado em --> response.
+    //Exemplo:
+    //Se input for "oi", o método retorna "Olá! Como posso ajudar?".
+    //Essa resposta será atribuída à variável response.
+
+}
     }
 
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+package main
 
-public class MiniChatBot {
-
-    public int numeracao = 0;
-
-    public String chatBot;
-
-    public String saudacoes() {
-        return "Olá! Eu sou o MiniChatBot, prazer em lhe conhecer. Como posso ajudar?";
+public class Main {
+    public static void main(String[] args) {
+        ChatBot miniChatbot = new ChatBot();
+        miniChatbot.start();
     }
-
-    public void conversar(String oqueDizer) {
-        System.out.println(oqueDizer);
-    }
-
-
-
-
-
 }
