@@ -1,4 +1,4 @@
-packet CarteiraDigital;
+package CarteiraDigital;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class CarteiraDigital {
     }
 }
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-packet Main
+package Main
 
 import java.util.Scanner;
 
